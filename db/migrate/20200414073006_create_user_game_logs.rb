@@ -9,7 +9,7 @@ class CreateUserGameLogs < ActiveRecord::Migration[6.0]
       t.float :player2_before_rate
       t.float :player2_after_rate
       t.boolean :first_player
-      t.varchar :kifu
+      t.text :kifu
       t.integer :rule
 
       t.timestamps

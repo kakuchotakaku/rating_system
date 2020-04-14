@@ -2,13 +2,15 @@ class CreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
       t.string :name
-      t.float :rate
+      t.float :rateing
       t.integer :win
       t.integer :lose
       t.integer :draw
       t.integer :successive_win
-      t.float :rate_first
-      t.float :rate_second
+      t.float :rating_first
+      t.float :rating_second
+      t.float :ratings_deviation
+      t.float :rating_volatility
 
       t.timestamps
     end
