@@ -1,0 +1,2 @@
+module UserGameLogsHelper
+end

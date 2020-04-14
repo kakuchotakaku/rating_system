@@ -1,0 +1,39 @@
+= form_for @user_game_log do |f|
+  - if @user_game_log.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user_game_log.errors.count, "error")} prohibited this user_game_log from being saved:"
+      ul
+        - @user_game_log.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :player1_user_id
+    = f.number_field :player1_user_id
+  .field
+    = f.label :player2_user_id
+    = f.number_field :player2_user_id
+  .field
+    = f.label :result
+    = f.number_field :result
+  .field
+    = f.label :player1_before_rate
+    = f.text_field :player1_before_rate
+  .field
+    = f.label :player1_after_rate
+    = f.text_field :player1_after_rate
+  .field
+    = f.label :player2_before_rate
+    = f.text_field :player2_before_rate
+  .field
+    = f.label :player2_after_rate
+    = f.text_field :player2_after_rate
+  .field
+    = f.label :first_player
+    = f.check_box :first_player
+  .field
+    = f.label :kifu
+    = f.text_field :kifu
+  .field
+    = f.label :rule
+    = f.number_field :rule
+  .actions = f.submit

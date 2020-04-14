@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: rating_system_production
-  username: rating_system
-  password: <%= ENV['RATING_SYSTEM_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5

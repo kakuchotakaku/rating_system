@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @user.name
+p
+  strong Rate:
+  = @user.rate
+p
+  strong Win:
+  = @user.win
+p
+  strong Lose:
+  = @user.lose
+p
+  strong Draw:
+  = @user.draw
+p
+  strong Successive win:
+  = @user.successive_win
+p
+  strong Rate first:
+  = @user.rate_first
+p
+  strong Rate second:
+  = @user.rate_second
+
+=> link_to 'Edit', edit_user_path(@user)
+'|
+=< link_to 'Back', users_path
