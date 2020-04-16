@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user_game_log do
     player1_user_id { 1 }
@@ -8,7 +10,7 @@ FactoryBot.define do
     player2_before_rate { 1.5 }
     player2_after_rate { 1.5 }
     first_player { false }
-    kifu { "" }
+    kifu { '' }
     rule { 1 }
   end
 end
