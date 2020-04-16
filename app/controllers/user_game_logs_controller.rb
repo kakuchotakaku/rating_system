@@ -25,37 +25,7 @@ class UserGameLogsController < ApplicationController
   # POST /user_game_logs.json
   def create
     @user_game_log = UserGameLog.new(user_game_log_params)
-
-    users = User.where(id: [user_game_log_params.player1_user_id, user_game_log_params.player2_user_id])
-    first_user = users.find { |user| user.id ==  user_game_log_params.player1_user_id}
-    second_user = users.find { |user| user.id ==  user_game_log_params.player2_user_id}
-
-    require 'glicko2'
-
-    # Objects to store Glicko ratings
-    Rating = Struct.new(:rating, :rating_deviation, :volatility)
-    rating1 = Rating.new(first_user.rating, first_user.rating_devitation, first_user.rating_volatility)
-    rating2 = Rating.new(second_user.rating, second_user.rating_devitation, second_user.rating_volatility)
-    # Rating period with all participating ratings
-    period = Glicko2::RatingPeriod.from_objs [rating1, rating2]
-    # Register a game where rating1 wins against rating2
-    case user_game_log_params.result
-    when 1 then
-      period.game([rating1, rating2], [1,2])
-    when 2 then
-      period.game([rating1, rating2], [2,1])
-    when 3 then
-      period.game([rating1, rating2], [1,1])
-    end
-    # Generate the next rating period with updated players
-    # 定数 τ は0.5で実装
-    next_period = period.generate_next(0.5)
-    # Update all Glicko ratings
-    next_period.players.each { |p| p.update_obj }
-    # Output updated Glicko ratings
-    first_user.update(rating: rating1.rating, rating_devitation: rating1.rating_deviation, rating_volatility: rating1.volatility)
-    second_user.update(rating: rating2.rating, rating_devitation: rating2.rating_deviation, rating_volatility: rating2.volatility)
-
+    ResultService.new(@user_game_log).execute
     respond_to do |format|
       if @user_game_log.save
         format.html { redirect_to @user_game_log, notice: 'User game log was successfully created.' }

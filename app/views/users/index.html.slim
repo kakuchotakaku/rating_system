@@ -4,13 +4,15 @@ table
   thead
     tr
       th Name
-      th Rate
+      th Rating
       th Win
       th Lose
       th Draw
       th Successive win
-      th Rate first
-      th Rate second
+      th Rating first
+      th Rating second
+      th Rating Devitation
+      th Rating Volatility
       th
       th
       th
@@ -19,13 +21,17 @@ table
     - @users.each do |user|
       tr
         td = user.name
-        td = user.rate
+        td = user.rating
         td = user.win
         td = user.lose
         td = user.draw
         td = user.successive_win
-        td = user.rate_first
-        td = user.rate_second
+        td = user.rating_first
+        td = user.rating_second
+        td = user.successive_win
+        td = user.rating_deviation
+        td = user.rating_volatility
+        td = user.last_played_at
         td = link_to 'Show', user
         td = link_to 'Edit', edit_user_path(user)
         td = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
@@ -33,3 +39,4 @@ table
 br
 
 = link_to 'New User', new_user_path
+

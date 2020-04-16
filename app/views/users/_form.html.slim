@@ -10,8 +10,8 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :rate
-    = f.text_field :rate
+    = f.label :rating
+    = f.text_field :rating
   .field
     = f.label :win
     = f.number_field :win
@@ -25,9 +25,20 @@
     = f.label :successive_win
     = f.number_field :successive_win
   .field
-    = f.label :rate_first
-    = f.text_field :rate_first
+    = f.label :rating_first
+    = f.text_field :rating_first
   .field
-    = f.label :rate_second
-    = f.text_field :rate_second
+    = f.label :rating_second
+    = f.text_field :rating_second
+  .field
+    = f.label :rating_deviation
+    = f.text_field :rating_deviation
+  .field
+    = f.label :rating_volatility
+    = f.text_field :rating_volatility
+  .field
+    = f.label :last_played_at
+    = f.text_field :last_played_at
   .actions = f.submit
+
+

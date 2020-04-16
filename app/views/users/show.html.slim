@@ -4,8 +4,8 @@ p
   strong Name:
   = @user.name
 p
-  strong Rate:
-  = @user.rate
+  strong Rating:
+  = @user.rating
 p
   strong Win:
   = @user.win
@@ -19,11 +19,20 @@ p
   strong Successive win:
   = @user.successive_win
 p
-  strong Rate first:
-  = @user.rate_first
+  strong Rating first:
+  = @user.rating_first
 p
-  strong Rate second:
-  = @user.rate_second
+  strong Rating second:
+  = @user.rating_second
+p
+  strong Rating second:
+  = @user.rating_deviation
+p
+  strong Rating second:
+  = @user.rating_volatility
+p
+  strong Rating second:
+  = @user.last_played_at
 
 => link_to 'Edit', edit_user_path(@user)
 '|
