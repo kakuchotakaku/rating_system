@@ -1,42 +1,15 @@
-h1 Listing users
+div.container
+  .normal-ui-group
+    h3
+      |
+      |　
+      = link_to "新規成績記録", 'user_game_logs/new', class: 'btn btn-primary'
 
-table
-  thead
-    tr
-      th Name
-      th Rating
-      th Win
-      th Lose
-      th Draw
-      th Successive win
-      th Rating first
-      th Rating second
-      th Rating Devitation
-      th Rating Volatility
-      th
-      th
-      th
 
-  tbody
-    - @users.each do |user|
-      tr
-        td = user.name
-        td = user.rating
-        td = user.win
-        td = user.lose
-        td = user.draw
-        td = user.successive_win
-        td = user.rating_first
-        td = user.rating_second
-        td = user.successive_win
-        td = user.rating_deviation
-        td = user.rating_volatility
-        td = user.last_played_at
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
+    h3 ユーザー一覧
 
-br
+    = render partial: 'users_list', locals: { users_list: @users }
 
-= link_to 'New User', new_user_path
+
+
 

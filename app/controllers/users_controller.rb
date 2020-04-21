@@ -2,11 +2,12 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order(sort_column + ' ' + sort_direction)
   end
 
   # GET /users/1
@@ -71,5 +72,13 @@ class UsersController < ApplicationController
   # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:name, :rate, :win, :lose, :draw, :successive_win, :rate_first, :rate_second)
+  end
+
+  def sort_column
+    params[:sort] || "name"
+  end
+  
+  def sort_direction
+    params[:direction] || "asc"
   end
 end

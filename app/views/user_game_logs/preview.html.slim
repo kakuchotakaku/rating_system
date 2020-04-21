@@ -1,0 +1,75 @@
+h1 プレビュー
+/このcreateとupdateの切り替えの実装はいまいちなのでscaffoldとか参考にしたほうがいいかも
+= form_for @user_game_log, url: @user_game_log.id ? "/admin_tools/#{@user_game_log.id}/update" : admin_tools_news_create_path do |f|
+  = f.submit '投稿画面に戻る', name: 'back', class: 'btn btn-info'
+  = f.submit '投稿する', class: 'btn btn-primary'
+  = f.hidden_field :id
+  table.table.table-hover
+    tbody
+      tr
+        th 優先度
+        td
+          = @user_game_log.priority
+          = f.hidden_field :priority
+      tr
+        th カテゴリ
+        td
+          = @user_game_log.category
+          = f.hidden_field :category
+      tr
+        th マイページにバナーを表示する
+        td
+          = @user_game_log.is_available_banner_list
+          = f.hidden_field :is_available_banner_list
+      tr
+        th ヘッダー画像パス
+        td
+          = image_tag "/assets/#{@user_game_log.banner_image_path}", class:'banner_img', width: "420px", height: "120px"
+          = f.hidden_field :banner_image_path
+      tr
+        th 開始日時
+        td
+          = @user_game_log.start_at
+          = f.hidden_field :start_at
+      tr
+        th 終了日時
+        td
+          = @user_game_log.end_at
+          = f.hidden_field :end_at
+      tr
+        th 開始時刻
+        td
+          = @user_game_log.start_hour_at
+          = f.hidden_field :start_hour_at
+      tr
+        th 終了時刻
+        td
+          = @user_game_log.end_hour_at
+          = f.hidden_field :end_hour_at
+      tr
+        th 週
+        td
+          = News.get_week_array(@user_game_log.week).join(" ")
+          div style="display: none;"
+            = week_array = News.get_week_array(@user_game_log.week)
+            - days = ["月", "火", "水", "木", "金", "土", "日"]
+            - days.map do |day|
+              = f.check_box :week, { checked: week_array&.include?(day), multiple: true }, day, false
+      tr
+        th タイトル
+        td.title_font
+          = @user_game_log.title.html_safe
+          = f.hidden_field :title
+      tr
+        th 本文詳細
+        / これをスマホそのままの表示っぽい感じで見られるようにする方法を考える。
+        /Ajaxのポップアップとかのほうがいいかも？そもそも本来通信不要だし。
+        td.text_detail_font
+          = @user_game_log.text_detail&.html_safe
+          = f.hidden_field :text_detail
+      tr
+        th 特殊アクション
+        td
+          = @user_game_log.special_action
+          = f.hidden_field :special_action
+
