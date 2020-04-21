@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+div.normal-ui-group {
+  padding: 1.5rem 0;
+}
+

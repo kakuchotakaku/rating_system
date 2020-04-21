@@ -58,6 +58,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.0)
     autodoc (0.7.3)
       actionpack
@@ -129,6 +132,7 @@ GEM
       railties (>= 4.2.0)
     ffi (1.12.2)
     formatador (0.2.5)
+    glicko2 (0.2.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.16.2)
@@ -341,12 +345,14 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  annotate
   autodoc
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.4.1)
   byebug
   config
   factory_bot_rails
+  glicko2
   guard-rspec
   guard-rubocop
   jbuilder (~> 2.7)

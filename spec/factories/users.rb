@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
+    name { 'MyString' }
     rate { 1.5 }
     win { 1 }
     lose { 1 }
