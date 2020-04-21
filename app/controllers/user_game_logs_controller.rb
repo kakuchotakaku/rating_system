@@ -15,7 +15,7 @@ class UserGameLogsController < ApplicationController
 
   # GET /user_game_logs/new
   def new
-    @user_game_log = UserGameLog.new
+    @user_game_log ||= UserGameLog.new
   end
 
   # GET /user_game_logs/1/edit
@@ -23,13 +23,33 @@ class UserGameLogsController < ApplicationController
 
   # POST /user_game_logs
   # POST /user_game_logs.json
+  # def create
+  #   @user_game_log = UserGameLog.new(user_game_log_params)
+  #   ResultService.new(@user_game_log).execute
+  #   respond_to do |format|
+  #     if @user_game_log.save
+  #       format.html { redirect_to @user_game_log, notice: 'User game log was successfully created.' }
+  #       format.json { render :show, status: :created, location: @user_game_log }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @user_game_log.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+  def preview
+    @user_game_log = UserGameLog.new(user_game_log_params)
+    @user_game_log.id = user_game_log_params[:id] if user_game_log_params[:id]
+    render :new unless @user_game_log.valid?
+  end
+
   def create
     @user_game_log = UserGameLog.new(user_game_log_params)
-    ResultService.new(@user_game_log).execute
     respond_to do |format|
-      if @user_game_log.save
-        format.html { redirect_to @user_game_log, notice: 'User game log was successfully created.' }
-        format.json { render :show, status: :created, location: @user_game_log }
+      if user_game_log_params[:back]
+        format.html { render action: :new }
+      elsif ResultService.new(@user_game_log).execute
+        format.html { redirect_to users_path, notice: 'user_game_log was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @user_game_log.errors, status: :unprocessable_entity }

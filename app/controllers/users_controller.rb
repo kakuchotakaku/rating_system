@@ -75,10 +75,10 @@ class UsersController < ApplicationController
   end
 
   def sort_column
-    params[:sort] || "name"
+    params[:sort] || 'name'
   end
-  
+
   def sort_direction
-    params[:direction] || "asc"
+    params[:direction] || 'asc'
   end
 end

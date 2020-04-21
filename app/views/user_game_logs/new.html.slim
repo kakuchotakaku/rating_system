@@ -1,5 +1,3 @@
-h1 New user_game_log
-
-== render 'form'
-
-= link_to 'Back', user_game_logs_path
+div.container
+  .normal-ui-group
+    = render partial: 'form', locals: { form_action: 'preview' }

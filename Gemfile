@@ -71,6 +71,7 @@ group :development, :test do
   gem 'rspec_boolean'
   gem 'rubocop'
   gem 'terminal-notifier-guard'
+  gem "annotate"
 end
 
 group :production do

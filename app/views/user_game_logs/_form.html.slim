@@ -5,7 +5,7 @@
 /       ul
 /         - @user_game_log.errors.full_messages.each do |message|
 /           li = message
-
+/ = form_for @user_game_log do |f|
 = form_with model: @user_game_log, local: true, url: { action: form_action }, class: 'form-group' do |f|
   = f.hidden_field :id
   h3
@@ -24,14 +24,17 @@
 
   .form-group.row
     .col-sm-6
-      = f.label :あなたのユーザー名, ""
-      = f.select :player1_user_id, User.all.map(&:id),  { class: 'form-control' }
+      = f.label :player1_user_id, "あなたのユーザー名"
+      = f.collection_select :player1_user_id, User.all, :id, :name, {prompt: ""}, { class: 'form-control' }
+      / = f.select :player1_user_id, User.all.map(&:name),  { class: 'form-control' }
     .col-sm-6
-      = f.label :対戦相手ののユーザー名, ""
-      = f.select :player2_user_id, User.all.map(&:id),  { class: 'form-control' }
+      = f.label :player2_user_id, "対戦相手のユーザー名"
+      = f.collection_select :player2_user_id, User.all, :id, :name, {prompt: ""}, { class: 'form-control' }
+
+      / = f.select :player2_user_id, User.all.map(&:name),  { class: 'form-control' }
     .col-sm-2
       = f.label :result, "対戦結果"
-      - options = user_game_log.results.keys.map {|result| [t("user_game_log.results.#{result}"), result] }
+      - options = UserGameLog.results.keys.map {|result| [t("user_game_log.results.#{result}"), result] }
       = f.select :result, options_for_select(options, @user_game_log.result), {},  { class: 'form-control' }
   /   .col-sm-2
   /     = f.label :priority, "優先度"
