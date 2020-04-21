@@ -1,12 +1,17 @@
-h1 確認
-= form_for @user do |f|
-  = f.submit 'ユーザー登録画面に戻る', name: 'back', class: 'btn btn-info'
-  = f.submit '登録する', class: 'btn btn-primary'
-  = f.hidden_field :id
-  table.table.table-hover
-    tbody
-      tr
-        th ユーザー名
-        td
-          = @user.name
-          = f.hidden_field :name
+div.container
+  h1 確認
+  = form_for @user do |f|
+    = f.hidden_field :id
+    table.table.table-striped
+      tbody
+        tr
+          th ユーザー名
+          td
+            = @user.name
+            = f.hidden_field :name
+    br
+    = link_to 'ユーザー登録画面に戻る', 'javascript:history.back()', class: 'btn btn-block btn-secondary'
+    br
+    br
+    = f.submit '登録する', class: 'btn btn-block btn-primary'
+

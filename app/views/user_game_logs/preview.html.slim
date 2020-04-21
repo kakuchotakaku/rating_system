@@ -1,23 +1,27 @@
-h1 プレビュー
-/このcreateとupdateの切り替えの実装はいまいちなのでscaffoldとか参考にしたほうがいいかも
-= form_for @user_game_log do |f|
-  = f.submit '成績記録画面に戻る', name: 'back', class: 'btn btn-info'
-  = f.submit '記録する', class: 'btn btn-primary'
-  = f.hidden_field :id
-  table.table.table-hover
-    tbody
-      tr
-        th あなたのユーザー名
-        td
-          = User.find(@user_game_log.player1_user_id).name
-          = f.hidden_field :player1_user_id
-      tr
-        th 対戦相手のユーザー名
-        td
-          = User.find(@user_game_log.player2_user_id).name
-          = f.hidden_field :player2_user_id
-      tr
-        th 対戦結果
-        td
-          = @user_game_log.result
-          = f.hidden_field :result
+div.container
+  h1 プレビュー
+  = form_for @user_game_log do |f|
+
+    = f.hidden_field :id
+    table.table.table-striped
+      tbody
+        tr
+          th あなたのユーザー名
+          td
+            = User.find(@user_game_log.player1_user_id).name
+            = f.hidden_field :player1_user_id
+        tr
+          th 対戦相手のユーザー名
+          td
+            = User.find(@user_game_log.player2_user_id).name
+            = f.hidden_field :player2_user_id
+        tr
+          th 対戦結果
+          td
+            = @user_game_log.result
+            = f.hidden_field :result
+
+    = link_to '成績記録画面に戻る', 'javascript:history.back()', class: 'btn btn-block btn-secondary'
+    br
+    br
+    = f.submit '記録する', class: 'btn btn-block btn-primary'
