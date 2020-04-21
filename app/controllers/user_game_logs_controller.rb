@@ -28,7 +28,9 @@ class UserGameLogsController < ApplicationController
   end
 
   def create
-    format.html { redirect_to user_geme_logs_new_path, notice: 'あなたのユーザー名を選択してください' } if user_game_log_params[:player1_user_id].nil?
+    if user_game_log_params[:player1_user_id].nil?
+      format.html { redirect_to user_geme_logs_new_path, notice: 'あなたのユーザー名を選択してください' }
+    end
     @user_game_log = UserGameLog.new(user_game_log_params)
     respond_to do |format|
       if user_game_log_params[:back]

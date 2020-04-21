@@ -13,6 +13,8 @@ class UserGameLog < ApplicationRecord
   }
 
   def check_same_user
-    errors.add(:player1_user_id, '同一ユーザーを選択しています') if player1_user_id == player2_user_id
+    if player1_user_id == player2_user_id
+      errors.add(:player1_user_id, '同一ユーザーを選択しています')
+    end
   end
 end
