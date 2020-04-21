@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   def won
     self.win += 1
-    self.successive_win += 1 if successive_win.positive?
+    self.successive_win += 1
   end
 
   def lost

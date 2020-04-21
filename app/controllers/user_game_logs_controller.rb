@@ -5,13 +5,13 @@ class UserGameLogsController < ApplicationController
 
   # GET /user_game_logs
   # GET /user_game_logs.json
-  def index
-    @user_game_logs = UserGameLog.all
-  end
+  # def index
+  #   @user_game_logs = UserGameLog.all
+  # end
 
   # GET /user_game_logs/1
   # GET /user_game_logs/1.json
-  def show; end
+  # def show; end
 
   # GET /user_game_logs/new
   def new
@@ -19,7 +19,7 @@ class UserGameLogsController < ApplicationController
   end
 
   # GET /user_game_logs/1/edit
-  def edit; end
+  # def edit; end
 
   def preview
     @user_game_log = UserGameLog.new(user_game_log_params)
@@ -46,27 +46,27 @@ class UserGameLogsController < ApplicationController
 
   # PATCH/PUT /user_game_logs/1
   # PATCH/PUT /user_game_logs/1.json
-  def update
-    respond_to do |format|
-      if @user_game_log.update(user_game_log_params)
-        format.html { redirect_to @user_game_log, notice: 'User game log was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_game_log }
-      else
-        format.html { render :edit }
-        format.json { render json: @user_game_log.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @user_game_log.update(user_game_log_params)
+  #       format.html { redirect_to @user_game_log, notice: 'User game log was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @user_game_log }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @user_game_log.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /user_game_logs/1
   # DELETE /user_game_logs/1.json
-  def destroy
-    @user_game_log.destroy
-    respond_to do |format|
-      format.html { redirect_to user_game_logs_url, notice: 'User game log was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @user_game_log.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to user_game_logs_url, notice: 'User game log was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
 

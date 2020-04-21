@@ -1,24 +1,6 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  - 仲間内での対戦ゲームのレートを記録できます。
+  - レート計算にはGlicko-2を利用しています。
+  - Glicko-2はELOよりも収束が早く正確です。
+    - 詳細は下記を参照してください。
+    - http://www.glicko.net/glicko/glicko2.pdf
