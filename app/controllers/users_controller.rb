@@ -16,27 +16,47 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @user ||= User.new
   end
 
   # GET /users/1/edit
   def edit; end
 
-  # POST /users
-  # POST /users.json
+  def preview
+    @user = User.new(user_params)
+    @user.id = user_params[:id] if user_params[:id]
+    render :new unless @user.valid?
+  end
+
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+      if user_params[:back]
+        format.html { render action: :new }
+      elsif @user.save!
+        format.html { redirect_to users_path, notice: 'user was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
+
+  # POST /users
+  # # POST /users.json
+  # def create
+  #   @user = User.new(user_params)
+
+  #   respond_to do |format|
+  #     if @user.save
+  #       format.html { redirect_to @user, notice: 'User was successfully created.' }
+  #       format.json { render :show, status: :created, location: @user }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @user.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
@@ -71,7 +91,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :rate, :win, :lose, :draw, :successive_win, :rate_first, :rate_second)
+    params.require(:user).permit(:id, :name)
   end
 
   def sort_column

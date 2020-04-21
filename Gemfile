@@ -59,6 +59,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   # Note: manual install gems
+  gem 'annotate'
   gem 'autodoc'
   gem 'factory_bot_rails'
   gem 'guard-rspec'
@@ -71,7 +72,6 @@ group :development, :test do
   gem 'rspec_boolean'
   gem 'rubocop'
   gem 'terminal-notifier-guard'
-  gem "annotate"
 end
 
 group :production do

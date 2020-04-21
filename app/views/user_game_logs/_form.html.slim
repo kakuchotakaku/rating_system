@@ -1,17 +1,8 @@
-/ = form_for @user_game_log do |f|
-/   - if @user_game_log.errors.any?
-/     #error_explanation
-/       h2 = "#{pluralize(@user_game_log.errors.count, "error")} prohibited this user_game_log from being saved:"
-/       ul
-/         - @user_game_log.errors.full_messages.each do |message|
-/           li = message
-/ = form_for @user_game_log do |f|
 = form_with model: @user_game_log, local: true, url: { action: form_action }, class: 'form-group' do |f|
   = f.hidden_field :id
   h3
     |対局記録作成
     |　
-    = f.submit "確認画面へ", class: 'btn btn-primary'
 
   - if @user_game_log.errors.any?
     div.alert.alert-danger role="alert"
@@ -36,112 +27,9 @@
       = f.label :result, "対戦結果"
       - options = UserGameLog.results.keys.map {|result| [t("user_game_log.results.#{result}"), result] }
       = f.select :result, options_for_select(options, @user_game_log.result), {},  { class: 'form-control' }
-  /   .col-sm-2
-  /     = f.label :priority, "優先度"
-  /     - priority_options = (1..100).map{|n| ["#{n}", n]}
-  /     = f.select :priority, options_for_select(priority_options, @user_game_log.priority), {}, { class: 'form-control' }
-  /   .col-sm-2
-  /     .custom-control.custom-switch
-  /       = f.check_box :is_available_banner_list, { class: 'custom-control-input' }
-  /       = f.label :is_available_banner_list, 'マイページにバナーを表示する', { class: 'custom-control-label' }
-  / .form-group.row
-  /   .col-sm-3
-  /     = f.label :start_at, "開始日時"
-  /     = f.datetime_field :start_at, class: 'form-control'
-  /   .col-sm-3
-  /     = f.label :end_at, "終了日時"
-  /     = f.datetime_field :end_at, class: 'form-control'
-  /   .col-sm-3
-  /     = f.label :start_hour_at, "開始時間"
-  /     = f.time_field :start_hour_at, value: @user_game_log.start_hour_at, class: 'form-control'
-  /   .col-sm-3
-  /     = f.label :end_hour_at, "終了時間"
-  /     = f.time_field :end_hour_at, value: @user_game_log.end_hour_at, class: 'form-control'
-  / .form-group.row
-  /   .col-sm-6
-  /     = f.label :banner_image_path, "バナーパス"
-  /     /FIXME 画像アップロード機能で登録した画像を取得する
-  /     - banners = Dir.open("#{Rails.root}/app/assets/images/",&:to_a) - %w(. .. .keep)
-  /     = f.select :banner_image_path, options_for_select((banners).map{|n| ["#{n}", n]}, @user_game_log.banner_image_path), {}, { class: 'form-control' }
-  /   .col-sm-6
-  /     = f.label "曜日指定（全部チェックを外してある場合、全ての曜日になります）"
-  /     .form-control
-  /       - week_array = user_game_log.get_week_array(@user_game_log.week)
-  /       - days = ["月", "火", "水", "木", "金", "土", "日"]
-  /       - days.map do |day|
-  /         = f.check_box :week, { checked: week_array&.include?(day), multiple: true }, day, false
-  /         = f.label "week_#{day}", day
-  /         |　
-  / .form-group.row
-  /   .col-sm-6
-  /     label for=""
-  /       |お知らせバナークリック時設定
-  /     .form-control
-  /       input type="radio" id="normal_webview" name="special_action_or_not" value="false"
-  /       |&nbsp;
-  /       label for="normal_webview"
-  /         |Webページを表示する
-  /       |　
-  /       input type="radio" id="do_special_action" name="special_action_or_not" value="true"
-  /       |&nbsp;
-  /       label for="do_special_action"
-  /         |その他のアクションを指定する
-  /   .col-sm-6
-  /     = f.label :special_action, "その他のアクション設定"
-  /     = f.text_field :special_action, placeholder: 'お知らせバナーで特殊なアクションを指定する場合は入力してください', class: 'form-control'
-  / .form-group.row
-  /   .col-sm-12
-  /     = f.label :text_detail, "お知らせ内容"
-  /     = f.text_area :text_detail, :size=>"60x30", placeholder: 'htmlを入力してください', class: 'form-control'
-  / javascript:
-  /   // letにするとたぶんturbolinksの関係で2回目？とかにエラーになる。外部jsに移植したらletで大丈夫になるかも？
-  /   var set_special_action_disabled = () => {
-  /     let do_special_action = $('input[name="special_action_or_not"]:checked').val();
-  /     let do_special_action_bool = do_special_action == 'true';
-  /     $('#user_game_log_special_action').prop('disabled', !do_special_action_bool);
-  /     $('#user_game_log_text_detail').prop('disabled', do_special_action_bool);
-  /   }
-  /   $(document).on('change', 'input[name="special_action_or_not"]', () => {
-  /     set_special_action_disabled();
-  /   });
-  /   if ($('#user_game_log_special_action').val()) {
-  /     $('#do_special_action').prop('checked', 'checked');
-  /   }
-  /   else {
-  /     $('#normal_webview').prop('checked', 'checked');
-  /   }
-  /   set_special_action_disabled();
-
-
-
-  / .field
-  /   = f.label :player1_user_id
-  /   = f.number_field :player1_user_id
-  / .field
-  /   = f.label :player2_user_id
-  /   = f.number_field :player2_user_id
-  / .field
-  /   = f.label :result
-  /   = f.number_field :result
-  / .field
-  /   = f.label :player1_before_rate
-  /   = f.text_field :player1_before_rate
-  / .field
-  /   = f.label :player1_after_rate
-  /   = f.text_field :player1_after_rate
-  / .field
-  /   = f.label :player2_before_rate
-  /   = f.text_field :player2_before_rate
-  / .field
-  /   = f.label :player2_after_rate
-  /   = f.text_field :player2_after_rate
-  / .field
-  /   = f.label :first_player
-  /   = f.check_box :first_player
-  / .field
-  /   = f.label :kifu
-  /   = f.text_field :kifu
-  / .field
-  /   = f.label :rule
-  /   = f.number_field :rule
-  / .actions = f.submit
+  .form-group.row
+    .col-sm-2
+      .actions  = f.submit "確認画面へ", class: 'btn btn-primary'
+  .form-group.row
+    .col-sm-2
+      .actions  = link_to '戻る', 'javascript:history.back()'

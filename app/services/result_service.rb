@@ -2,7 +2,7 @@
 
 require 'glicko2'
 class ResultService < BaseService
-  Rating = Struct.new(:rating, :rating_deviation, :volatility)
+  Rating = Struct.new(:id, :rating, :rating_deviation, :volatility)
 
   def initialize(user_game_log)
     @user_game_log = user_game_log
@@ -11,8 +11,8 @@ class ResultService < BaseService
     @second_user = users.find { |user| user.id == @user_game_log.player2_user_id }
 
     # Objects to store Glicko ratings
-    @rating1 = Rating.new(@first_user.rating, @first_user.rating_deviation, @first_user.rating_volatility)
-    @rating2 = Rating.new(@second_user.rating, @second_user.rating_deviation, @second_user.rating_volatility)
+    @rating1 = Rating.new(@first_user.id, @first_user.rating, @first_user.rating_deviation, @first_user.rating_volatility)
+    @rating2 = Rating.new(@second_user.id, @second_user.rating, @second_user.rating_deviation, @second_user.rating_volatility)
     # @player1 = Glicko2::Player.from_obj(@rating1)
     # @player2 = Glicko2::Player.from_obj(@rating2)
 
@@ -26,22 +26,21 @@ class ResultService < BaseService
     # Rating period with all participating ratings
     period = Glicko2::RatingPeriod.from_objs [@rating1, @rating2]
     # Register a game where rating1 wins against rating2
-    binding.pry
     if @user_game_log.win?
       period.game([@rating1, @rating2], [1, 2])
-      @first_user.win
-      @second_user.lose
+      @first_user.won
+      @second_user.lost
     elsif @user_game_log.lose?
       period.game([@rating1, @rating2], [2, 1])
-      @first_user.lose
-      @second_user.win
+      @first_user.lost
+      @second_user.won
     elsif @user_game_log.draw?
       period.game([@rating1, @rating2], [1, 1])
-      @first_user.draw
-      @second_user.draw
+      @first_user.drew
+      @second_user.drew
     end
     # Generate the next rating period with updated players
-    # 定数 τ は0.5で実装
+    # 定数 τ は0.5で実装, 0.3 ~ 1.2の幅推奨　http://www.glicko.net/glicko/glicko2.pdf
     next_period = period.generate_next(0.5)
     # Update all Glicko ratings
     next_period.players.each(&:update_obj)

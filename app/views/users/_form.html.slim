@@ -1,44 +1,25 @@
-= form_for @user do |f|
+= form_with model: @user, local: true, url: { action: form_action }, class: 'form-group' do |f|
+  h3
+    |新規ユーザー登録
+    |　
+
   - if @user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+    div.alert.alert-danger role="alert"
+      h2
+        = pluralize(@user.errors.count, "error")
+        | prohibited this user from being saved:
       ul
         - @user.errors.full_messages.each do |message|
-          li = message
+          li= message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :rating
-    = f.text_field :rating
-  .field
-    = f.label :win
-    = f.number_field :win
-  .field
-    = f.label :lose
-    = f.number_field :lose
-  .field
-    = f.label :draw
-    = f.number_field :draw
-  .field
-    = f.label :successive_win
-    = f.number_field :successive_win
-  .field
-    = f.label :rating_first
-    = f.text_field :rating_first
-  .field
-    = f.label :rating_second
-    = f.text_field :rating_second
-  .field
-    = f.label :rating_deviation
-    = f.text_field :rating_deviation
-  .field
-    = f.label :rating_volatility
-    = f.text_field :rating_volatility
-  .field
-    = f.label :last_played_at
-    = f.text_field :last_played_at
-  .actions = f.submit
-
+  .form-group.row
+    .col-sm-3
+      = f.label :name, "ユーザー名"
+      = f.text_field :name, class: 'form-control'
+  .form-group.row
+    .col-sm-2
+      .actions  = f.submit "確認画面へ", class: 'btn btn-primary'
+  .form-group.row
+    .col-sm-2
+      .actions  = link_to '戻る', 'javascript:history.back()'
 

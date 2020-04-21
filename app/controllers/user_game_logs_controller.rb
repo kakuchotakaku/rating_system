@@ -21,22 +21,6 @@ class UserGameLogsController < ApplicationController
   # GET /user_game_logs/1/edit
   def edit; end
 
-  # POST /user_game_logs
-  # POST /user_game_logs.json
-  # def create
-  #   @user_game_log = UserGameLog.new(user_game_log_params)
-  #   ResultService.new(@user_game_log).execute
-  #   respond_to do |format|
-  #     if @user_game_log.save
-  #       format.html { redirect_to @user_game_log, notice: 'User game log was successfully created.' }
-  #       format.json { render :show, status: :created, location: @user_game_log }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @user_game_log.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   def preview
     @user_game_log = UserGameLog.new(user_game_log_params)
     @user_game_log.id = user_game_log_params[:id] if user_game_log_params[:id]
@@ -44,6 +28,7 @@ class UserGameLogsController < ApplicationController
   end
 
   def create
+    format.html { redirect_to user_geme_logs_new_path, notice: 'あなたのユーザー名を選択してください' } if user_game_log_params[:player1_user_id].nil?
     @user_game_log = UserGameLog.new(user_game_log_params)
     respond_to do |format|
       if user_game_log_params[:back]
