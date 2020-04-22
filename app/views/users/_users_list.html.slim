@@ -11,7 +11,7 @@ table.table.table-striped
   - users_list.each do |user|
     tr
       td = user.name
-      td = user.rating
+      td = user.rating.round
       td = user.win
       td = user.lose
       td = user.draw

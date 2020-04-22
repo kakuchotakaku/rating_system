@@ -20,6 +20,16 @@ div.container
           td
             = @user_game_log.result
             = f.hidden_field :result
+        tr
+          th 棋譜URL
+          td
+            = @user_game_log.kifu
+            = f.hidden_field :kifu
+        / tr
+        /   th 先後
+        /   td
+        /     = @user_game_log.first_player
+        /     = f.hidden_field :first_player
 
     = link_to '成績記録画面に戻る', 'javascript:history.back()', class: 'btn btn-block btn-secondary'
     br

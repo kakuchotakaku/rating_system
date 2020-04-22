@@ -12,6 +12,8 @@ class UserGameLog < ApplicationRecord
     draw: 3
   }
 
+  # enum first_player: {first_player: 1, second_player: 0}
+
   def check_same_user
     if player1_user_id == player2_user_id
       errors.add(:player1_user_id, '同一ユーザーを選択しています')
