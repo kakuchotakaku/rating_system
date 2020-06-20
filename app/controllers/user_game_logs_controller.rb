@@ -5,9 +5,9 @@ class UserGameLogsController < ApplicationController
 
   # GET /user_game_logs
   # GET /user_game_logs.json
-  # def index
-  #   @user_game_logs = UserGameLog.all
-  # end
+  def index
+    @user_game_logs = UserGameLog.all.order("created_at desc")
+  end
 
   # GET /user_game_logs/1
   # GET /user_game_logs/1.json

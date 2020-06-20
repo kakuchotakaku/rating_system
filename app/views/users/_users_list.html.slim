@@ -16,6 +16,6 @@ table.table.table-striped
       td = user.lose
       td = user.draw
       td = user.successive_win
-      / td = link_to '見る', "/users/#{user.id}/show"
+      / td = link_to '見る', "/users/#{user.id}"
       / td = link_to '編集', "/users/#{user.id}/edit"
-      td = link_to '削除', "/users/#{user.id}/destroy" , method: :delete, data: { confirm: "「#{user.name}」を削除しますか？" }
+      td = link_to '削除', "/users/#{user.id}" , method: :delete, data: { confirm: "「#{user.name}」を削除しますか？" }

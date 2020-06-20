@@ -1,39 +1,27 @@
-/ h1 Listing user_game_logs
+div.container
+  .normal-ui-group
+    / h3
+    /   |
+    /   |　
+    /   = link_to "新規ユーザー登録", 'users/new', class: 'btn btn-primary btn-lg active'
+    h3
+      |
+      |　
+      = link_to "新規成績記録", 'user_game_logs/new', class: 'btn btn-primary btn-lg active'
+    h3
+      |
+      |　
+      = link_to "TOPへ", '/', class: 'btn btn-primary btn-lg active'
+    / h3
+    /   |
+    /   |　
+    /   = link_to "ユーザー一覧", 'users', class: 'btn btn-primary btn-lg active'
 
-/ table
-/   thead
-/     tr
-/       th Player1 user
-/       th Player2 user
-/       th Result
-/       th Player1 before rate
-/       th Player1 after rate
-/       th Player2 before rate
-/       th Player2 after rate
-/       th First player
-/       th Kifu
-/       th Rule
-/       th
-/       th
-/       th
 
-/   tbody
-/     - @user_game_logs.each do |user_game_log|
-/       tr
-/         td = user_game_log.player1_user_id
-/         td = user_game_log.player2_user_id
-/         td = user_game_log.result
-/         td = user_game_log.player1_before_rate
-/         td = user_game_log.player1_after_rate
-/         td = user_game_log.player2_before_rate
-/         td = user_game_log.player2_after_rate
-/         td = user_game_log.first_player
-/         td = user_game_log.kifu
-/         td = user_game_log.rule
-/         td = link_to 'Show', user_game_log
-/         td = link_to 'Edit', edit_user_game_log_path(user_game_log)
-/         td = link_to 'Destroy', user_game_log, data: { confirm: 'Are you sure?' }, method: :delete
 
-/ br
+    h3 ユーザー対戦記録一覧
 
-/ = link_to 'New User game log', new_user_game_log_path
+    = render partial: 'user_game_logs_list', locals: { user_game_logs_list: @user_game_logs }
+
+
+

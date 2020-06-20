@@ -1,0 +1,75 @@
+table.table.table-striped
+  tr
+    thead
+      th ユーザー１
+      th ユーザー２
+      th 結果
+      th 先後
+      th 棋譜URL
+      th = sortable "対局日時"
+      th colspan="3"
+  - user_game_logs_list.each do |user_game_log|
+    tr
+      td = User.find_by(id: user_game_log.player1_user_id)&.name
+      td = User.find_by(id: user_game_log.player2_user_id)&.name
+      - if user_game_log.result == "win"
+        - @result = "勝ち"
+      - elsif user_game_log.result == "draw"
+        - @result = "引分"
+      - else
+        - @result = "負け"
+      td = @result
+      - @first_player = user_game_log.first_player? ? "先手" : "後手"
+      td = @first_player
+      td = link_to "#{user_game_log.kifu}"
+      td = user_game_log.created_at
+      / td = user_game_log.lose
+      / td = user_game_log.draw
+      / td = user_game_log.successive_win
+      / td = link_to '見る', "/user_game_logs/#{user_game_log.id}"
+      / td = link_to '編集', "/user_game_logs/#{user_game_log.id}/edit"
+      / td = link_to '削除', "/user_game_logs/#{user_game_log.id}" , method: :delete, data: { confirm: "「#{user_game_log.name}」を削除しますか？" }
+
+
+
+
+/ h1 Listing user_game_logs
+
+/ table
+/   thead
+/     tr
+/       th Player1 user
+/       th Player2 user
+/       th Result
+/       th Player1 before rate
+/       th Player1 after rate
+/       th Player2 before rate
+/       th Player2 after rate
+/       th First player
+/       th Kifu
+/       th Rule
+/       th
+/       th
+/       th
+
+/   tbody
+/     - @user_game_logs.each do |user_game_log|
+/       tr
+/         td = user_game_log.player1_user_id
+/         td = user_game_log.player2_user_id
+/         td = user_game_log.result
+/         td = user_game_log.player1_before_rate
+/         td = user_game_log.player1_after_rate
+/         td = user_game_log.player2_before_rate
+/         td = user_game_log.player2_after_rate
+/         td = user_game_log.first_player
+/         td = user_game_log.kifu
+/         td = user_game_log.rule
+/         td = link_to 'Show', user_game_log
+/         td = link_to 'Edit', edit_user_game_log_path(user_game_log)
+/         td = link_to 'Destroy', user_game_log, data: { confirm: 'Are you sure?' }, method: :delete
+
+/ br
+
+/ = link_to 'New User game log', new_user_game_log_path
+
